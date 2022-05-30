@@ -70,7 +70,7 @@
                         <div class="d-flex justify-content-center">
                             @if (isset($first_order))
                                 @if ($first_order->status == "pending")
-                                    <button class="btn btn-danger btn-cancel me-5" onclick="cancel_order()">Cancel</button>
+                                    <button class="btn btn-danger btn-cancel me-5" onclick="cancel_order({{$first_order->id}})">Cancel</button>
                                     <button class="btn btn-primary btn-checkout" onclick="checkout_order({{$first_order->id}})">Checkout</button>
                                 @elseif($first_order->status == "completed")
                                     <button class="btn btn-success btn-checkout" onclick="refund({{$first_order->id}})">Refund</button>
@@ -154,7 +154,7 @@
                     @foreach ($orders as $key => $order)
                         <li class="list-group-item d-flex justify-content-between align-items-center @if($order->id == $first_order->id) active @endif" onclick="show_order({{$order->id}})">
                             <span >{{$order->reference_no}} ( {{$order->status}} )</span>
-                            <button class="btn btn-danger" onclick="delete_order(this, {{$order->id}})"><i class="fa-solid fa-trash"></i></button>
+                            {{-- <button class="btn btn-danger" onclick="delete_order(this, {{$order->id}})"><i class="fa-solid fa-trash"></i></button> --}}
                         </li>
                     @endforeach
                 </ul>
@@ -178,7 +178,7 @@
 
                     <input type="hidden" name="order_id" 
                         @if (isset($first_order))
-                            alue="{{$first_order->id}}"
+                            value="{{$first_order->id}}"
                         @endif
                     >
 
@@ -322,8 +322,17 @@
         return false;
     }
 
-    function cancel_order(){
-        console.log('sdsd');
+    function cancel_order(id){
+        $.ajax({
+            url: '/order/'+id,
+            method: "delete",
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            success: function (reponse) {  
+                if(reponse == '1'){
+                    window.location.replace("/");
+                }
+            }
+        });
     }
 
     function checkout_order(id){
