@@ -1,13 +1,73 @@
 <div class="container-fluid">
 
     <div class="row">
-        <div class="col-12 text-end pb-4">
+        <div class="col-12 text-end">
             <button class="btn btn-primary" onclick="createNewOrder()">Create New Order</button>
         </div>
-        <div class="col-12 col-md-9 ps-5">
+        <div class="col-12 col-md-9 pt-4">
             <div class="p-6 dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg w-100">
                 <div class="row">
-                    <div class="col-6" style="border-right:1px solid grey">
+                    <div class="col-12 d-block d-md-none">
+                        <div class="d-flex align-items-center justify-content-center py-3">
+                            <div class="ml-4 text-lg leading-7 font-semibold text-white">Product</div>
+                        </div>
+
+                        <div class="row ">
+
+                            <div class="col-6" 
+                                @if (isset($first_order))
+                                    @if ($first_order->status == "pending")
+                                        onclick="add_product('Dutch Lady', 2, 1, {{$first_order->id}})"
+                                    @endif
+                                @endif
+                                >
+                            
+                                <div class="product_item">
+                                    <span>Dutch Lady</span>
+                                </div>
+                            </div>
+
+                            <div class="col-6" 
+                                @if (isset($first_order))
+                                    @if ($first_order->status == "pending")
+                                        onclick="add_product('Farm Fresh', 3, 1, {{$first_order->id}})"
+                                    @endif
+                                @endif
+                                >
+                                <div class="product_item" >
+                                    <span>Farm Fresh</span>
+                                </div>
+                            </div>
+
+                            <div class="col-6" 
+                                @if (isset($first_order))
+                                    @if ($first_order->status == "pending")
+                                        onclick="add_product('Almond Milk', 4, 1, {{$first_order->id}})"
+                                    @endif
+                                @endif
+                               
+                                >
+                                <div class="product_item">
+                                    <span>Almond Milk</span>
+                                </div>
+                            </div>
+
+                            <div class="col-6" 
+                                @if (isset($first_order))
+                                    @if ($first_order->status == "pending")
+                                        onclick="add_product('Goodday Milk', 5, 1, {{$first_order->id}})"
+                                    @endif
+                                @endif
+                                >
+                                <div class="product_item">
+                                    <span>Goodday Milk</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 cashier_border">
 
                         <div class="d-flex align-items-center flex-column">
                             <div class="ml-4 text-lg leading-7 font-semibold text-white">POS</div>
@@ -81,7 +141,7 @@
 
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-4 col-md-6 d-none d-md-block">
                         <div class="d-flex align-items-center justify-content-center py-3">
                             <div class="ml-4 text-lg leading-7 font-semibold text-white">Product</div>
                         </div>
@@ -143,7 +203,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-3 pt-4">
             <div class="dark:bg-gray-800 shadow sm:rounded-lg w-100 p-3">
 
                 <div class="d-flex align-items-center justify-content-center py-3">

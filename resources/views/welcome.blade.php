@@ -72,6 +72,17 @@
                 margin: 0.5rem 0 !important;
             }
 
+            .cashier_border{
+                border-right:1px solid grey
+            }
+
+            @media only screen and (max-width: 768px) {
+                .cashier_border{
+                    border-right:none;
+                    padding-top: 2rem;
+                }
+            }
+
         </style>
 
         <!-- Boostrap -->
