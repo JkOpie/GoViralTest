@@ -18,8 +18,8 @@ class OrderController extends Controller
     {
         $order_items = collect(); $calc_total = [];
         
-        $orders = Order::orderBy('created_at', 'desc')->get();
-        $first_order = Order::orderBy('created_at', 'desc')->first();
+        $orders = Order::orderBy('reference_no', 'desc')->get();
+        $first_order = Order::orderBy('reference_no', 'desc')->first();
 
         if($first_order){
            
@@ -50,7 +50,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $lastOrder = 0;
-        $lastOrder = Order::orderBy('created_at','DESC')->first();
+        $lastOrder = Order::orderBy('reference_no','DESC')->first();
 
         if($lastOrder){
             $lastOrder = $lastOrder->id;
@@ -83,7 +83,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $orders = Order::orderBy('created_at', 'desc')->get();
+        $orders = Order::orderBy('reference_no', 'desc')->get();
         $first_order = Order::where('id', $id)->first();
         $order_items = OrderItem::where('order_id', $first_order->id )->orderBy('created_at', 'desc')->get();
         $calc_total = $this->calc_total($first_order->id);
